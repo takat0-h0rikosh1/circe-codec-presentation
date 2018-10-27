@@ -1,4 +1,4 @@
-@size[1.5em]JSON Codec を楽しもう<br>現場で役立つ circe
+@size[2.0em]JSON Codec を楽しもう<br>現場で役立つ circe
 
 +++
 
