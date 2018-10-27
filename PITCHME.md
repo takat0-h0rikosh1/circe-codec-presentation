@@ -1,13 +1,35 @@
-@size[2.0em]JSON Codec を楽しもう<br>現場で役立つ circe
+@size[2.0em](JSON Codec を楽しもう<br>現場で役立つ circe)
 
 +++
 
-#### 自己紹介  
-- 名前: 堀越 貴斗
-- 会社: セプテーニ・オリジナル
-- 職種: ソフトウェアエンジニア
-- 趣味: 筋トレ, ランニング, ドライブ, サウナ
-- twitter: [@tkt_hoorie](https://twitter.com/tkt_hoorie)
+@size[1.2em](告知事項)
+
++++
+
+@size[1.2em](Scala関西サミットに登壇するぞ!!!)<br>
+https://2018.scala-kansai.org/
+
++++
+
+本日、話すのはScala関西の発表ネタです<br>
+よろしくおねがいします m(__)m
+
++++
+
+@snap[west]
+自己紹介<br> 
+・名前: 堀越 貴斗<br>
+・会社: セプテーニ・オリジナル<br>
+・職種: ソフトウェアエンジニア<br>
+・趣味: <br>
+    筋トレ, ランニング, ドライブ,<br> 
+    サウナ,...etc<br>
+・twitter: [@tkt_hoorie](https://twitter.com/tkt_hoorie)
+@snapend
+
+@snap[east]
+![](t_horikoshi_profile.jpg)
+@snapend
 
 +++
 
