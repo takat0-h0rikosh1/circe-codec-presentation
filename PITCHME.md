@@ -59,10 +59,29 @@ libraryDependencies ++= Seq(
 
 +++
 
-Sample JSON
+circe-parser に parse module が実装されている
+
+@[1-11]
+@[12-23]
+@[25-27]
+@[29]
+@[30]
+@[31-46]
 
 ```scala
-val jsonString: String = """{
+scala> val jsonString: String = """{
+     |   "foo": "foo value",
+     |   "bar": {
+     |      "bar_child": "bar child value"
+     |    },
+     |   "array":[
+     |     { "content": 1 },
+     |     { "content": 2 },
+     |     { "content": 3 }
+     |   ]
+     | }"""
+jsonString: String =
+{
   "foo": "foo value",
   "bar": {
      "bar_child": "bar child value"
@@ -72,14 +91,8 @@ val jsonString: String = """{
     { "content": 2 },
     { "content": 3 }
   ]
-}"""
-```
+}
 
-+++
-
-circe-parser に parse module が実装されている
-
-```scala
 scala> import io.circe._, io.circe.parser._
 import io.circe._
 import io.circe.parser._
@@ -118,23 +131,22 @@ parsed: Either[io.circe.ParsingFailure,io.circe.Json] =
   Left(io.circe.ParsingFailure: expected json value got I (line 1, column 1))
 ```
 
+@[1-2]
+@[4]
+@[5-6]
+
 +++
 
 @size[1.5em](Traversing and modifying)
 
 +++
 
-Sample JSON Part2
+Cursor という概念によって JSON を変換・抽出する
 
 ```scala
 scala> val jsonString = """{
      |   "id": "c730433b-082c-4984-9d66-855c243266f0",
      |   "name": "Foo",
-     |   "counts": [
-     |     1,
-     |     2,
-     |     3
-     |   ],
      |   "values": {
      |     "bar": true,
      |     "baz": 100.001,
@@ -144,26 +156,29 @@ scala> val jsonString = """{
      |     ]
      |   }
      | }"""
-```
 
-+++
-
-Cursor という概念によって JSON を変換・抽出する
-
-```scala
 scala> val doc: Json = parse(jsonString).getOrElse(Json.Null)
 doc: io.circe.Json =
 {
   "id" : "c730433b-082c-4984-9d66-855c243266f0",
   "name" : "Foo",
-  
-  /* 省略 */ 
-
+  "values" : {
+    "bar" : true,
+    "baz" : 100.001,
+    "qux" : [
+      "a",
+      "b"
+    ]
+  }
 }
 
 scala> val cursor: HCursor = doc.hcursor
 cursor: io.circe.HCursor = io.circe.cursor.TopCursor@7aca17af
 ```
+
+@[1-12]
+@[14-27]
+@[29-30]
 
 +++
 
@@ -174,26 +189,54 @@ cursor: io.circe.HCursor = io.circe.cursor.TopCursor@7aca17af
 HCursor の downField を使って抽出処理
 
 ```scala
-scala> val baz: Decoder.Result[Double] =
-     |   cursor.downField("values").downField("baz").as[Double]
+// {
+//    "id": "c730433b-082c-4984-9d66-855c243266f0",
+//    "name": "Foo",
+//    "values": {
+//      "bar": true,
+//      "baz": 100.001, // 取り出すよ!!!
+//      "qux": [
+//        "a",
+//        "b"
+//      ]
+//    }
+//  }
+
+scala> val baz = cursor.downField("values").downField("baz").as[Double]
 baz: io.circe.Decoder.Result[Double] = Right(100.001)
 
-scala> val baz2: Decoder.Result[Double] =
-     |   cursor.downField("values").get[Double]("baz")
+scala> val baz2 = cursor.downField("values").get[Double]("baz")
 baz2: io.circe.Decoder.Result[Double] = Right(100.001)
 ```
+
+@[1-12]
+@[4-10]
+@[6]
+@[14-15]
+@[17-18]
 
 +++
 
 配列の抽出
 
 ```scala
-scala> val qux: Decoder.Result[Seq[String]] =
-     |  cursor.downField("values").downField("qux").as[Seq[String]]
+// {
+//    "id": "c730433b-082c-4984-9d66-855c243266f0",
+//    "name": "Foo",
+//    "values": {
+//      "bar": true,
+//      "baz": 100.001, 
+//      "qux": [
+//        "a",
+//        "b"
+//      ] // この配列を取り出すよ!!!
+//    }
+//  }
+
+scala> val qux = cursor.downField("values").downField("qux").as[Seq[String]]
 qux: io.circe.Decoder.Result[Seq[String]] = Right(List(a, b))
 
-scala> val secondQux: Decoder.Result[String] =
-     |   cursor.downField("values").downField("qux").downArray.right.as[String]
+scala> val secondQux = cursor.downField("values").downField("qux").downArray.right.as[String]
 secondQux: io.circe.Decoder.Result[String] = Right(b)
 ```
 
@@ -207,6 +250,24 @@ secondQux: io.circe.Decoder.Result[String] = Right(b)
 (文字列を逆さに)
 
 ```scala
+// {
+//    "id": "c730433b-082c-4984-9d66-855c243266f0",
+//    "name": "Foo", // 文字列を逆さにするよ!!!
+//    "counts": [
+//      1,
+//      2,
+//      3
+//    ],
+//    "values": {
+//      "bar": true,
+//      "baz": 100.001,
+//      "qux": [
+//        "a",
+//        "b"
+//      ]
+//    }
+//  }
+
 scala> val reversedNameCursor: ACursor =
      |   cursor.downField("name").withFocus(_.mapString(_.reverse))
 reversedNameCursor: io.circe.ACursor = io.circe.cursor.ObjectCursor@42127805
@@ -215,7 +276,7 @@ scala> val reversedNameJson = reversedNameCursor.top
 reversedNameJson: Option[io.circe.Json] =
 Some({
   "id" : "c730433b-082c-4984-9d66-855c243266f0",
-  "name" : "ooF",
+  "name" : "ooF", // 逆さになったよ!!!
   "counts" : [
     1,
     2,
