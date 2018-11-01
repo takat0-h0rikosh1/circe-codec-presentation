@@ -28,7 +28,7 @@
 
 +++
 
-#### アジェンダ
+#### 本日の内容 
 @ul
 - Scala の JSON ライブラリ circe の使い方について解説
 - [公式ドキュメント](https://circe.github.io/circe/)を題材に主要箇所を Pick up して説明
