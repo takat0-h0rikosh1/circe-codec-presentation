@@ -12,6 +12,7 @@
 @size[0.8em](● 会社: セプテーニ・オリジナル)<br>
 @size[0.8em](● 職種: ソフトウェアエンジニア)<br>
 @size[0.8em](● 趣味: 筋トレ, サウナ, ドライブ)<br>
+@size[0.8em](● 好物: Scala, AWS, Protain)<br>
 @size[0.8em](● Twitter:) [@tkt_hoorie](https://twitter.com/tkt_hoorie)<br>
 @snapend
 
