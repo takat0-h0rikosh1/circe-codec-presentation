@@ -2,40 +2,26 @@
 
 +++
 
-@size[1.2em](告知事項)
-
-+++
-
-@size[1.2em](Scala関西サミットに登壇するぞ!!!)<br>
-https://2018.scala-kansai.org/
-
-+++
-
-本日、話すのはScala関西の発表ネタです<br>
-よろしくおねがいします m(__)m
-
-+++
-
-@snap[west]
-自己紹介<br> 
-・名前: 堀越 貴斗<br>
-・会社: セプテーニ・オリジナル<br>
-・職種: ソフトウェアエンジニア<br>
-・趣味: <br>
-    筋トレ, ランニング, ドライブ,<br> 
-    サウナ,...etc<br>
-・twitter: [@tkt_hoorie](https://twitter.com/tkt_hoorie)
+@snap[east]
+![](t_horikoshi_profile.jpg) 
 @snapend
 
-@snap[east]
-![](t_horikoshi_profile.jpg)
+@snap[west]
+@size[0.8em](自己紹介)<br>
+@size[0.8em](● 名前: 堀越 貴斗)<br>
+@size[0.8em](● 会社: セプテーニ・オリジナル)<br>
+@size[0.8em](● 職種: ソフトウェアエンジニア)<br>
+@size[0.8em](● 趣味: 筋トレ, サウナ, ドライブ)<br>
+@size[0.8em](● Twitter:) [@tkt_hoorie](https://twitter.com/tkt_hoorie)<br>
 @snapend
 
 +++
 
 #### 本日の内容
+@ul
 - Scala の JSON ライブラリ circe の使い方について解説
-- [公式ドキュメント](https://circe.github.io/circe/)を題材に主要箇所を Pick up して説明 
+- [公式ドキュメント](https://circe.github.io/circe/)を題材に主要箇所を Pick up して説明
+@ulend
 
 +++
 
@@ -240,6 +226,12 @@ scala> val secondQux = cursor.downField("values").downField("qux").downArray.rig
 secondQux: io.circe.Decoder.Result[String] = Right(b)
 ```
 
+@[1-12]
+@[4-10]
+@[7-10]
+@[14-15]
+@[17-18]
+
 +++
 
 @size[1.5em](Transforming data)
@@ -253,11 +245,6 @@ secondQux: io.circe.Decoder.Result[String] = Right(b)
 // {
 //    "id": "c730433b-082c-4984-9d66-855c243266f0",
 //    "name": "Foo", // 文字列を逆さにするよ!!!
-//    "counts": [
-//      1,
-//      2,
-//      3
-//    ],
 //    "values": {
 //      "bar": true,
 //      "baz": 100.001,
@@ -277,11 +264,6 @@ reversedNameJson: Option[io.circe.Json] =
 Some({
   "id" : "c730433b-082c-4984-9d66-855c243266f0",
   "name" : "ooF", // 逆さになったよ!!!
-  "counts" : [
-    1,
-    2,
-    3
-  ],
   "values" : {
     "bar" : true,
     "baz" : 100.001,
@@ -292,6 +274,12 @@ Some({
   }
 })
 ```
+
+@[1-12]
+@[3]
+@[14-16]
+@[18]
+@[19-31]
 
 +++
 
