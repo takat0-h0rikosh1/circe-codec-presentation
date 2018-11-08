@@ -365,7 +365,7 @@ decoded: io.circe.Decoder.Result[Greeting] = Right(Greeting(Hey,Person(Chris),3)
 
 +++
 
-@size[1.5em](Custome Codec)
+@size[1.5em](Custom Codec)
 
 +++
 
