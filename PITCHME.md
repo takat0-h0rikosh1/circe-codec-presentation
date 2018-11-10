@@ -2,10 +2,6 @@
 
 +++
 
-@snap[east]
-![](t_horikoshi_profile.jpg) 
-@snapend
-
 @snap[west]
 @size[0.8em](自己紹介)<br>
 @size[0.8em](● 名前: 堀越 貴斗)<br>
