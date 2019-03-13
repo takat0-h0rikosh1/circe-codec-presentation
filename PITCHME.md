@@ -2,18 +2,13 @@
 
 +++
 
-@snap[east]
-![](t_horikoshi_profile.jpg) 
-@snapend
-
 @snap[west]
 @size[0.8em](自己紹介)<br>
 @size[0.8em](● 名前: 堀越 貴斗)<br>
 @size[0.8em](● 会社: セプテーニ・オリジナル)<br>
 @size[0.8em](● 職種: ソフトウェアエンジニア)<br>
-@size[0.8em](● 趣味: 筋トレ, サウナ, ドライブ)<br>
-@size[0.8em](● 好物: Scala, AWS, プロテイン)<br>
-@size[0.8em](● Twitter:) [@tkt_hoorie](https://twitter.com/tkt_hoorie)<br>
+@size[0.8em](● 関心: Scala, AWS)<br>
+@size[0.8em](● Twitter:) [@tkt_horikoshi](https://twitter.com/tkt_horikoshi)<br>
 @snapend
 
 +++
